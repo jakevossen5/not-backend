@@ -1,4 +1,4 @@
-//import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
@@ -32,11 +32,11 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
     // LandingpageComponent
   ],
   imports: [
-   // BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     // BsDropdownModule.forRoot(),
     // ProgressbarModule.forRoot(),
     // TooltipModule.forRoot(),

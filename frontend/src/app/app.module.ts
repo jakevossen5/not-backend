@@ -32,11 +32,11 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
     // LandingpageComponent
   ],
   imports: [
-    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     // BsDropdownModule.forRoot(),
     // ProgressbarModule.forRoot(),
     // TooltipModule.forRoot(),

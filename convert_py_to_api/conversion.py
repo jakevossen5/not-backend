@@ -36,6 +36,4 @@ def get_flask_decorator(line: str):
     return "@app.route('/" + func_name + "')"
 
 
-print(get_flask_decorator("def hello_world()"))
-print(get_flask_decorator("def ffdfdfd(sasd fdf fdf)"))
 main()

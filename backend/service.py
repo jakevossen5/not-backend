@@ -32,6 +32,7 @@ def handle_request(uid: str, method: str, parms: str):
     print('method is', method)
     global current_port_number
     print('in handle request')
+    parms = '/'.join(parms.split(','))
     main_path = uuids_to_paths[uid]
     # os.system('nohup python3 test/main.py &')
     print(
@@ -42,7 +43,7 @@ def handle_request(uid: str, method: str, parms: str):
     time.sleep(3)
 
     r = requests.get('http://127.0.0.1:' +
-                     str(current_port_number) + '/' + method)
+                     str(current_port_number) + '/' + method + '/' + parms)
     print('responce?', r.text)
     # need to do a request to localhost to call the method that they want
 
@@ -71,6 +72,7 @@ def rec(unamerepo: str):
     download_zip_folder = repo + '-master'
     os.system('unzip ' + download_zip_folder + ' -d ' + uid)
     os.system('unzip ' + download_zip_folder + ' -d ' + uid_dep)
+    os.system('rm *.zip')
 
     # figure out how to output
     in_file_path = uid + '/' + repo + '-master/main.py'
@@ -130,10 +132,19 @@ def get_flask_decorator(line: str, uid: str):
     # string def func(line: str, uid: str)
     params = line.split('(')[1].split(',')
     params[len(params)-1] = params[len(params)-1][:-3]
+    if '' in params:
+        params.remove('')
+    print('params', params)
+
+    result = ''
+    for p in params:
+        result += '<'
+        result += p.strip()
+        result += '>/'
     tail = ','.join(params)
-    tail = ''.join([x if x!= ' ' else '' for x in tail])
-    print(tail)
-    return "@app.route('/" + func_name + '/'+ tail + "')"
+    tail = ''.join([x if x != ' ' else '' for x in tail])
+    print(result)
+    return "@app.route('/" + func_name + '/' + result + "')"
 
 
 if __name__ == "__main__":

@@ -134,3 +134,5 @@ dmypy.json
 convert_py_to_api/app.py
 convert_py_to_api/main.py
 convert_py_to_api/app/main.py
+backend/test/.DS_Store
+.DS_Store

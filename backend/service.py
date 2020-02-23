@@ -10,23 +10,27 @@ from typing import List
 app = Flask(__name__)
 cors = CORS(app)
 
+uuids_to_paths = {}
+
 
 @app.route('/')
 def start():
-    handle_request('test', 'test2')
+    # handle_request('test', 'test2')
     return 'server running'
 
 
-def handle_request(uid_deployed: str, method: str):
+@app.route('/handlereq/<uid>', methods=['POST', 'OPTIONS'])
+def handle_request(uid: str):
     print('in handle request')
-    dir_of_main = '6c501795-2c5e-44a0-b375-2a3115ed1d7f'
+    main_path = uuids_to_paths[uid]
     # os.system('nohup python3 test/main.py &')
+    print(
+        'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port 5001) &')
     os.system(
-        'nohup $(export FLASK_APP=test/main.py;flask run --host 127.0.0.1 --port 5001) &')
+        'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port 5001) &')
+
     print('after os system')
-    # exec('test/main.py')
-    # subprocess.call(
-    # ["exec", "mistakes.sh", "test"])
+    return jsonify("This is our responce?")
 
 
 @app.route('/post/<unamerepo>', methods=['POST', 'OPTIONS'])
@@ -45,19 +49,19 @@ def rec(unamerepo: str):
 
     uid_dep = uid + '-dep'
 
-    # wget.download(git_url)
-    #download_zip_folder = repo + '-master'
-    #os.system('unzip ' + download_zip_folder + ' -d ' + uid)
-    #os.system('unzip ' + download_zip_folder + ' -d ' + uid_dep)
-    # os.system('mv ' + )
+    wget.download(git_url)
+    download_zip_folder = repo + '-master'
+    os.system('unzip ' + download_zip_folder + ' -d ' + uid)
+    os.system('unzip ' + download_zip_folder + ' -d ' + uid_dep)
 
     # figure out how to output
     in_file_path = uid + '/' + repo + '-master/main.py'
     out_file_path = uid_dep + '/' + repo + '-master/main.py'
+    uuids_to_paths[uid] = out_file_path
 
-    handle_request('a', 'b')
+    # handle_request(uid)
 
-    # convert(in_file_path, out_file_path, uid)
+    convert(in_file_path, out_file_path, uid)
 
     response = app.response_class(
         response=json.dumps(request.form.get('url')),
@@ -96,7 +100,7 @@ def convert(input_file: str, output_file: str, uid: str) -> None:
 
     print("printing output lines")
 
-    output_file = open(output_file, 'wb')
+    output_file = open(output_file, 'w')
     for line in output_lines:
         output_file.write(line + '\n' if len(line) > 0 else '')
 

@@ -1,9 +1,9 @@
 from flask import Flask, request
-from flask import request, jsonify
-# from flask_cors import CORS
+from flask import request, jsonify, json
+from flask_cors import CORS
 
 app = Flask(__name__)
-# CORS(app)
+cors = CORS(app)
 
 
 @app.route('/')
@@ -11,11 +11,22 @@ def start():
     return 'server running'
 
 
-@app.route('/post', methods=['POST'])
+@app.route('/post', methods=['POST', 'OPTIONS'])
 def rec():
     # data = d.json
+    data = print('url', request.form.get('url'))
+    response = app.response_class(
+        response=json.dumps(request.form.get('url')),
+        status=200,
+        mimetype='application/json'
+    )
+
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     print(request.form.get('url'))
-    return jsonify(request.form.get('url'))
+    return response
     # return data['url']
 
 

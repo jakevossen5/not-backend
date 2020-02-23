@@ -54,58 +54,73 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   makePostRequest() {
 
-    let res = axios.post('http://127.0.0.1:5000/post', {
-        'url': 'https://github.com/calebrotello/test'
+    var bodyFormData = new FormData();
+
+    bodyFormData.set('url', 'asdfa');
+
+    let res = axios.post('http://localhost:5000/post', {
+      headers: {
+        'Access-Control-Allow-Origin:': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Content-Type': 'multipart/form-data'
+      },
+      data: bodyFormData
+
+    }).then(function (response) {
+      console.log(response)
+
     });
 
-        /*
-    console.log(`Status code: ${res.status}`);
-    console.log(`Status text: ${res.statusText}`);
-    console.log(`Request method: ${res.request.method}`);
-    console.log(`Path: ${res.request.path}`);
 
-    onsole.log(`Date: ${res.headers.date}`);
-    console.log(`Data: ${res.data}`);
-    */
+
+    /*
+console.log(`Status code: ${res.status}`);
+console.log(`Status text: ${res.statusText}`);
+console.log(`Request method: ${res.request.method}`);
+console.log(`Path: ${res.request.path}`);
+
+onsole.log(`Date: ${res.headers.date}`);
+console.log(`Data: ${res.data}`);
+*/
 
   }
- 
+
   submitCode(): void {
     this.makePostRequest();
 
 
-/*
-    var https = require('follow-redirects').https;
-    var fs = require('fs');
-    
-    var options = {
-      'method': 'POST',
-      'hostname': 'localhost',
-      'port': 5000,
-      'path': '/post',
-      'headers': {
-        'Content-Type': 'application/json'
-      },
-      'maxRedirects': 20
-    };
-    
-    var req = https.request(options, function (res) {
-      var chunks = [];
-    
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
-      res.on("end", function (chunk) {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-      });
-      res.on("error", function (error) {
-        console.error(error);
-      });
-    });
-   var postData = JSON.stringify({"url":"https://github.com/calebrotello/test"});
-    req.write(postData);    
-   req.end();
-*/
+    /*
+        var https = require('follow-redirects').https;
+        var fs = require('fs');
+        
+        var options = {
+          'method': 'POST',
+          'hostname': 'localhost',
+          'port': 5000,
+          'path': '/post',
+          'headers': {
+            'Content-Type': 'application/json'
+          },
+          'maxRedirects': 20
+        };
+        
+        var req = https.request(options, function (res) {
+          var chunks = [];
+        
+          res.on("data", function (chunk) {
+            chunks.push(chunk);
+          });
+          res.on("end", function (chunk) {
+            var body = Buffer.concat(chunks);
+            console.log(body.toString());
+          });
+          res.on("error", function (error) {
+            console.error(error);
+          });
+        });
+       var postData = JSON.stringify({"url":"https://github.com/calebrotello/test"});
+        req.write(postData);    
+       req.end();
+    */
   }
 }

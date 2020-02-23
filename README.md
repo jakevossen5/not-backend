@@ -1,4 +1,4 @@
-<img src="images/fullScreen.png" width="900" alt="img">
+<img src="https://raw.githubusercontent.com/jakevossen5/backend-but-not/master/images/fullScreen.png" width="900" alt="img">
 
 ## Inspiration
 Do you need an API? Are you tired of AWS and its complicated UI? API design tools can be confusing for beginners, so we set out to create the most simple backend deployment tool on the market - !Backend(pronounced not backend)
@@ -6,7 +6,7 @@ Do you need an API? Are you tired of AWS and its complicated UI? API design tool
 ## What it does
 !Backend takes a URL to a public GitHub repository, and gives you a link to run the functions as API requests.
 
-<img src="images/urlInput.png" width="800" alt="img">
+<img src="https://raw.githubusercontent.com/jakevossen5/backend-but-not/master/images/urlInput.png" width="800" alt="img">
 
 ## How it works
 The service is built using Angular front-end web framework and Python Flask back-end framework. 
@@ -21,7 +21,7 @@ The result is an API that looks like this: `http://notbacken.tec/r/<unique_uuid>
 
 When a request is sent, if uses the UUID generated from step 4 to access the correct flask server, and runs the method with the parameters specified
 
-<img src="images/diagram.jpg" width="700" alt="img">
+<img src="https://raw.githubusercontent.com/jakevossen5/backend-but-not/master/images/diagram.jpg" width="700" alt="img">
 
 
 

@@ -90,7 +90,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     console.log(uLink);
 
     // pass to server
-    var serverUrl = 'http://localhost:5000/post/'.concat(uLink);
+    var serverUrl = 'http://127.0.0.1:5000/post/'.concat(uLink);
 
     let res = axios.post(serverUrl, {
       headers: {
@@ -100,7 +100,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       },
     }).then((response) => {
       console.log(response.data)
-      this.api = response.data
+      this.api = 'http://127.0.0.1:5000/r/' + response.data
     });
     // var api = this.makePostRequest();
     // this.api = api;

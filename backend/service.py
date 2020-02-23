@@ -127,7 +127,13 @@ def convert(input_file: str, output_file: str, uid: str) -> None:
 def get_flask_decorator(line: str, uid: str):
     # should probably do this with a regex but hackathon am i right
     func_name = line.split('(')[0].split(' ')[1]
-    return "@app.route('/" + func_name + "')"
+    # string def func(line: str, uid: str)
+    params = line.split('(')[1].split(',')
+    params[len(params)-1] = params[len(params)-1][:-3]
+    tail = ','.join(params)
+    tail = ''.join([x if x!= ' ' else '' for x in tail])
+    print(tail)
+    return "@app.route('/" + func_name + '/'+ tail + "')"
 
 
 if __name__ == "__main__":

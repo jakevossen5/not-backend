@@ -54,17 +54,30 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   makePostRequest() {
 
+    // get url from text input
+
+    // remove last / if it exists
+
+    // split by /
+
+    // get last two element
+
+    // seperate them by comma
+
+    // concat uname , project
+
+    // pass to server
+
     var bodyFormData = new FormData();
 
     bodyFormData.set('url', 'asdfa');
 
-    let res = axios.post('http://localhost:5000/post', {
+    let res = axios.post('http://localhost:5000/post/jakevossen5,jake.vossen.dev', {
       headers: {
         'Access-Control-Allow-Origin:': '*',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
         'Content-Type': 'multipart/form-data'
       },
-      data: bodyFormData
 
     }).then(function (response) {
       console.log(response)

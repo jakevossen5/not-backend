@@ -11,10 +11,11 @@ def start():
     return 'server running'
 
 
-@app.route('/post', methods=['POST', 'OPTIONS'])
-def rec():
+@app.route('/post/<unamerepo>', methods=['POST', 'OPTIONS'])
+def rec(unamerepo):
     # data = d.json
-    data = print('url', request.form.get('url'))
+    print(unamerepo)
+    # data = print('url', request.form.get('url'))
     response = app.response_class(
         response=json.dumps(request.form.get('url')),
         status=200,
@@ -26,7 +27,7 @@ def rec():
                          'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     print(request.form.get('url'))
-    return response
+    return jsonify(unamerepo)
     # return data['url']
 
 

@@ -17,7 +17,7 @@ The service is built using Angular front-end web framework and Python Flask back
   3. Backend server converts the `main.py` from the GitHub repo to a Python Flask application
   4. Web server returns API URL that can now call the functions of `main.py`
 
-The result is an API that looks like this: `http://notbacken.tec/r/<unique_uuid>/<your_python_function>/<comma,seperated,args>
+The result is an API that looks like this: `http://notbacken.tec/r/<unique_uuid>/<your_python_function>/<comma,seperated,args>`
 
 When a request is sent, if uses the UUID generated from step 4 to access the correct flask server, and runs the method with the parameters specified
 
@@ -36,5 +36,15 @@ Overall we where not very experienced with web development and javascript, so so
 ## What's next for !Backend
 + API generation depends on many factors - such as return types in the Python functions and structure of program
 + Security has to be handled very carefully whenever arbitrary code is being run on a server. Right now, security is not handled that way.
+
+## Developer docs
+
+### /frontend
+Run `npm install` for dependencies and `ng serve` to start the website.
+
+### /backend
+Run `python3 service.py` to start the Flask web server.
+
+
 
 

@@ -9,7 +9,7 @@ Do you need an api? Are you tired of AWS and it complicated UI? A lot of the tim
   + Webserver starts a new instance for every function
   + Webserver returns API URL
 
-(diagram.jpg)
+![](diagram.jpg)
 
 After the whole process, you should have a URL that runs your Python API.
 

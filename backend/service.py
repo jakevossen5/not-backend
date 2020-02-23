@@ -70,7 +70,8 @@ def rec(unamerepo: str):
                          'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     print(request.form.get('url'))
-    return jsonify(unamerepo)
+    #return jsonify(unamerepo) this is what jake had i commented out for testing return url
+    return "https://caleb.rotello.dev"
     # return data['url']
 
 

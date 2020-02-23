@@ -10,6 +10,7 @@ declare const Buffer
 })
 export class IndexComponent implements OnInit, OnDestroy {
   isCollapsed = true;
+  api:string = "Your API will be here."
   focus;
   focus1;
   focus2;
@@ -82,9 +83,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     console.log(uLink);
 
     // pass to server
-    //var bodyFormData = new FormData();
-    //bodyFormData.set('url', 'asdfa');
-
     var serverUrl = 'http://localhost:5000/post/'.concat(uLink);
 
     let res = axios.post(serverUrl, {
@@ -94,47 +92,14 @@ export class IndexComponent implements OnInit, OnDestroy {
         'Content-Type': 'multipart/form-data'
       },
     }).then(function (response) {
-      console.log(response)
-
+      console.log(response.data)
     });
+    return res.response.data;
   }
 
   submitCode(): void {
-    this.makePostRequest();
-
-
-    /*
-        var https = require('follow-redirects').https;
-        var fs = require('fs');
-
-        var options = {
-          'method': 'POST',
-          'hostname': 'localhost',
-          'port': 5000,
-          'path': '/post',
-          'headers': {
-            'Content-Type': 'application/json'
-          },
-          'maxRedirects': 20
-        };
-
-        var req = https.request(options, function (res) {
-          var chunks = [];
-
-          res.on("data", function (chunk) {
-            chunks.push(chunk);
-          });
-          res.on("end", function (chunk) {
-            var body = Buffer.concat(chunks);
-            console.log(body.toString());
-          });
-          res.on("error", function (error) {
-            console.error(error);
-          });
-        });
-       var postData = JSON.stringify({"url":"https://github.com/calebrotello/test"});
-        req.write(postData);
-       req.end();
-    */
+    var api = this.makePostRequest();
+    this.api = api;
+    console.log(api);
   }
 }

@@ -102,7 +102,7 @@
       <div class="container">
         <!-- <h2 class="title">Basic Elements</h2> -->
         <h3>Git URL:</h3>
-        <input class="form-control" placeholder="repo clone url" type="text">
+        <input #urlbox [ngModel]="text" class="form-control form-control-success" >
         <h3></h3>
         <div class="row">
           <div class="col-md-10">
@@ -162,7 +162,7 @@
             -->
             <li class="nav-item">
               <a class="nav-link" href="https://opensource.org/licenses/MIT">
-                License
+                MIT License
               </a>
             </li>
           </ul>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Inject,ViewChild,ElementRef,AfterViewInit } from "@angular/core";
 import noUiSlider from "nouislider";
 const axios = require('axios');
 declare var require: any
@@ -52,50 +52,51 @@ export class IndexComponent implements OnInit, OnDestroy {
     body.classList.remove("index-page");
   }
 
+  @ViewChild('urlbox', {static: true}) input:ElementRef;
+
+  ngAfterViewInit() {
+    console.log(this.input.nativeElement.value);
+    return this.input.nativeElement.value;
+  };
+
   makePostRequest() {
 
     // get url from text input
+    var u = this.ngAfterViewInit();
 
     // remove last / if it exists
+    if (u.charAt(u.length-1) == '/'){
+      u = u.substr(0, u.length-1);
+    }
 
     // split by /
+    var uSplit = u.split('/');
 
     // get last two element
-
-    // seperate them by comma
+    var uName = uSplit[uSplit.length-2];
+    var uRepo = uSplit[uSplit.length-1];
 
     // concat uname , project
+    uName = uName.concat(',');
+    var uLink = uName.concat(uRepo);
+    console.log(uLink);
 
     // pass to server
+    //var bodyFormData = new FormData();
+    //bodyFormData.set('url', 'asdfa');
 
-    var bodyFormData = new FormData();
+    var serverUrl = 'http://localhost:5000/post/'.concat(uLink);
 
-    bodyFormData.set('url', 'asdfa');
-
-    let res = axios.post('http://localhost:5000/post/jakevossen5,jake.vossen.dev', {
+    let res = axios.post(serverUrl, {
       headers: {
         'Access-Control-Allow-Origin:': '*',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
         'Content-Type': 'multipart/form-data'
       },
-
     }).then(function (response) {
       console.log(response)
 
     });
-
-
-
-    /*
-console.log(`Status code: ${res.status}`);
-console.log(`Status text: ${res.statusText}`);
-console.log(`Request method: ${res.request.method}`);
-console.log(`Path: ${res.request.path}`);
-
-onsole.log(`Date: ${res.headers.date}`);
-console.log(`Data: ${res.data}`);
-*/
-
   }
 
   submitCode(): void {
@@ -105,7 +106,7 @@ console.log(`Data: ${res.data}`);
     /*
         var https = require('follow-redirects').https;
         var fs = require('fs');
-        
+
         var options = {
           'method': 'POST',
           'hostname': 'localhost',
@@ -116,10 +117,10 @@ console.log(`Data: ${res.data}`);
           },
           'maxRedirects': 20
         };
-        
+
         var req = https.request(options, function (res) {
           var chunks = [];
-        
+
           res.on("data", function (chunk) {
             chunks.push(chunk);
           });
@@ -132,7 +133,7 @@ console.log(`Data: ${res.data}`);
           });
         });
        var postData = JSON.stringify({"url":"https://github.com/calebrotello/test"});
-        req.write(postData);    
+        req.write(postData);
        req.end();
     */
   }

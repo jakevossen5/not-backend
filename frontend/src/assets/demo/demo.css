@@ -115,7 +115,7 @@
 }
 
 .tim-note {
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 #buttons .btn,
@@ -444,7 +444,7 @@
 
 .brand .h1-seo {
   font-size: 5em;
-  text-transform: uppercase;
+  text-transform: none;
   font-weight: 300;
 }
 

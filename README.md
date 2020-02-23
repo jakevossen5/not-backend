@@ -1,4 +1,4 @@
-<img src="images/notBackend.png" width="400" alt="img">
+<img src="images/notBackend.png" width="600" alt="img">
 
 ## Inspiration
 Do you need an api? Are you tired of AWS and its complicated UI? A lot of the time, you just need an API link to run your Python code. With !Backend (not backend), this is possible.
@@ -27,6 +27,8 @@ After the whole process, you should have a URL that runs your Python API.
 + Front end development
 
 ## Accomplishments that we're proud of
++ creating a well engineered and simple user experience
++ designing an inovative backend
 
 ## What's next for !Backend
 + The API generation is only possible under very specific conditions. The project could be built on to allow for larger projects with more specialized tools.

@@ -11,6 +11,7 @@ app = Flask(__name__)
 cors = CORS(app)
 
 uuids_to_paths = {}
+current_port_numer = 5001
 
 
 @app.route('/')
@@ -74,7 +75,7 @@ def rec(unamerepo: str):
                          'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     print(request.form.get('url'))
-    #return jsonify(unamerepo) this is what jake had i commented out for testing return url
+    # return jsonify(unamerepo) this is what jake had i commented out for testing return url
     return "https://caleb.rotello.dev"
     # return data['url']
 
@@ -97,7 +98,7 @@ def convert(input_file: str, output_file: str, uid: str) -> None:
         output_lines.append(line)
 
     output_lines.append("if __name__ == '__main__':")
-    output_lines.append("    app.run(debug=True, host='127.0.0.1', port=5001)")
+    output_lines.append("    app.run(debug=True, host='127.0.0.1')")
 
     print("printing output lines")
 
@@ -109,7 +110,7 @@ def convert(input_file: str, output_file: str, uid: str) -> None:
 def get_flask_decorator(line: str, uid: str):
     # should probably do this with a regex but hackathon am i right
     func_name = line.split('(')[0].split(' ')[1]
-    return "@app.route('/" + uid + '/' + func_name + "')"
+    return "@app.route('/" + func_name + "')"
 
 
 if __name__ == "__main__":

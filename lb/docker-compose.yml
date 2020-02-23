@@ -20,3 +20,9 @@ services:
     image: containous/whoami
     labels:
       - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+  myimage:
+# A container that exposes an API to show its IP address
+    image: myimage
+    labels:
+       - "traefik.http.routers.myimage.rule=Host(`myimage.docker.localhost`)" 
+

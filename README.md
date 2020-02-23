@@ -17,7 +17,7 @@ The service is built using Angular front-end web framework and Python Flask back
   3. Backend server converts the `main.py` from the GitHub repo to a Python Flask application
   4. Web server returns API URL that can now call the functions of `main.py`
 
-The result is an API that looks like this: `http://notbacken.tec/r/<unique_uuid>/<your_python_function>/<comma,seperated,args>`
+The result is an API that looks like this: http://notbacken.tec/r/<unique_uuid>/<your_python_function>/<comma,seperated,args>
 
 When a request is sent, if uses the UUID generated from step 4 to access the correct flask server, and runs the method with the parameters specified
 

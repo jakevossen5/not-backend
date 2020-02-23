@@ -20,8 +20,10 @@ def start():
 def handle_request(uid_deployed: str, method: str):
     print('in handle request')
     dir_of_main = '6c501795-2c5e-44a0-b375-2a3115ed1d7f'
-    os.system('nohup python3 test/main.py &')
-    os.system('export FLASK_APP=test/main.py;flask run --host 127.0.0.1 --port 5001')
+    # os.system('nohup python3 test/main.py &')
+    os.system(
+        'nohup $(export FLASK_APP=test/main.py;flask run --host 127.0.0.1 --port 5001) &')
+    print('after os system')
     # exec('test/main.py')
     # subprocess.call(
     # ["exec", "mistakes.sh", "test"])

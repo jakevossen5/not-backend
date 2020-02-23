@@ -22,8 +22,14 @@ def start():
     return 'server running'
 
 
-@app.route('/handlereq/<uid>', methods=['POST', 'OPTIONS'])
-def handle_request(uid: str):
+@app.route('/r/<uid>/<method>/', methods=['GET', 'OPTIONS'])
+def handle_request_no_parms(uid: str, method: str):
+    return handle_request(uid, method, "")
+
+
+@app.route('/r/<uid>/<method>/<parms>', methods=['GET', 'OPTIONS'])
+def handle_request(uid: str, method: str, parms: str):
+    print('method is', method)
     global current_port_number
     print('in handle request')
     main_path = uuids_to_paths[uid]
@@ -33,9 +39,10 @@ def handle_request(uid: str):
     os.system(
         'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port ' + str(current_port_number) + ') &')
 
-    time.sleep(5)
+    time.sleep(3)
 
-    r = requests.get('http://127.0.0.1:' + str(current_port_number) + '/main')
+    r = requests.get('http://127.0.0.1:' +
+                     str(current_port_number) + '/' + method)
     print('responce?', r.text)
     # need to do a request to localhost to call the method that they want
 

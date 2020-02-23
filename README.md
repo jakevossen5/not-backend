@@ -37,4 +37,14 @@ Overall we where not very experienced with web development and javascript, so so
 + API generation depends on many factors - such as return types in the Python functions and structure of program
 + Security has to be handled very carefully whenever arbitrary code is being run on a server. Right now, security is not handled that way.
 
+## Developer docs
+
+### /frontend
+Run `npm install` for dependencies and `ng serve` to start the website.
+
+### /backend
+Run `python3 service.py` to start the Flask web server.
+
+
+
 

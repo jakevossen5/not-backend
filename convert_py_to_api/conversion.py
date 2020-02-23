@@ -22,7 +22,7 @@ def main() -> None:
         output_lines.append(line)
 
     output_lines.append("if __name__ == '__main__':")
-    output_lines.append("    app.run(debug=True, host='0.0.0.0', port=8080)")
+    output_lines.append("    app.run(debug=True, host='0.0.0.0')")
 
     print("printing output lines")
     output_file = open(output_file, 'w')

@@ -1,10 +1,10 @@
 <img src="images/notBackend.png" width="400" alt="img">
 
 ## Inspiration
-Do you need an api? Are you tired of AWS and its complicated UI? A lot of the time, you just need an API link to run your Python code. With !Backend (not backend), this is possible.
+Do you need an API? Are you tired of AWS and its complicated UI? API design tools can be confusing for beginners, so we set out to create the most simple backend deployment tool on the market - !Backend(pronounced not backend)
 
 ## What it does
-!Backend takes a URL to a public GitHub repository, sends it to run on a Python web server, and returns a link to execute the code.
+!Backend takes a URL to a public GitHub repository, and gives you a link to run the functions as API requests.
 
 <img src="images/urlInput.png" width="500" alt="img">
 
@@ -12,10 +12,12 @@ Do you need an api? Are you tired of AWS and its complicated UI? A lot of the ti
 The service is built using Angular front-end web framework and Python Flask back-end framework. 
 !Backend runs in the following steps:
   
-  + Ask for URL input for GitHub public repository
-  + Send URL to a Python web server
-  + Web server starts a new instance for every function
-  + Web server returns API URL
+  1. Ask for URL input for GitHub public repository
+  2.  Send URL to a Python web server
+  3. Backend server converts the `main.py` from the GitHub repo to a Python Flask application
+  4. Web server returns API URL that can now call the functions of `main.py`
+
+When a request is sent, if uses the UUID generated from step 4 to access the correct flask server, and runs the method with the parameters specified
 
 <img src="images/diagram.jpg" width="700" alt="img">
 

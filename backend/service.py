@@ -1,10 +1,17 @@
 from flask import Flask, request
-app = Flask(__name__)
+from flask_cors import CORS
 
-@app.route('/post', methods = ["POST"])
-def post():
-    print (request.data)
-    return ''
+app = Flask(__name__)
+#CORS(app)
+
+@app.route('/')
+def start():
+    return 'server running'
+
+@app.route('/post/', methods=['POST'])
+def rec():
+    data = request.json()
+    return data['url']
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-//import 
 import noUiSlider from "nouislider";
 const axios = require('axios');
 declare var require: any
+declare const Buffer
 
 @Component({
   selector: "app-index",
@@ -46,25 +46,66 @@ export class IndexComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("index-page");
   }
 
-  makePostRequest(): void {
+  makePostRequest() {
 
-    let res = axios.post('http://127.0.0.1:5000/post');
+    let res = axios.post('http://127.0.0.1:5000/post', {
+        'url': 'https://github.com/calebrotello/test'
+    });
 
+        /*
     console.log(`Status code: ${res.status}`);
     console.log(`Status text: ${res.statusText}`);
     console.log(`Request method: ${res.request.method}`);
     console.log(`Path: ${res.request.path}`);
 
-    console.log(`Date: ${res.headers.date}`);
+    onsole.log(`Date: ${res.headers.date}`);
     console.log(`Data: ${res.data}`);
+    */
+
   }
  
   submitCode(): void {
     this.makePostRequest();
+
+
+/*
+    var https = require('follow-redirects').https;
+    var fs = require('fs');
+    
+    var options = {
+      'method': 'POST',
+      'hostname': 'localhost',
+      'port': 5000,
+      'path': '/post',
+      'headers': {
+        'Content-Type': 'application/json'
+      },
+      'maxRedirects': 20
+    };
+    
+    var req = https.request(options, function (res) {
+      var chunks = [];
+    
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      });
+      res.on("end", function (chunk) {
+        var body = Buffer.concat(chunks);
+        console.log(body.toString());
+      });
+      res.on("error", function (error) {
+        console.error(error);
+      });
+    });
+   var postData = JSON.stringify({"url":"https://github.com/calebrotello/test"});
+    req.write(postData);    
+   req.end();
+*/
   }
 }

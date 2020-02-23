@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+//import 
 import noUiSlider from "nouislider";
+const axios = require('axios');
+declare var require: any
 
 @Component({
   selector: "app-index",
@@ -48,7 +51,20 @@ export class IndexComponent implements OnInit, OnDestroy {
     body.classList.remove("index-page");
   }
 
+  makePostRequest(): void {
+
+    let res = axios.post('http://127.0.0.1:5000/post');
+
+    console.log(`Status code: ${res.status}`);
+    console.log(`Status text: ${res.statusText}`);
+    console.log(`Request method: ${res.request.method}`);
+    console.log(`Path: ${res.request.path}`);
+
+    console.log(`Date: ${res.headers.date}`);
+    console.log(`Data: ${res.data}`);
+  }
+ 
   submitCode(): void {
-    console.log('back to where we where')
+    this.makePostRequest();
   }
 }

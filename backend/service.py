@@ -1,4 +1,5 @@
 import os
+import time
 import subprocess
 from flask import Flask, request
 from flask import request, jsonify, json
@@ -6,12 +7,13 @@ from flask_cors import CORS
 import wget
 import uuid
 from typing import List
+import requests
 
 app = Flask(__name__)
 cors = CORS(app)
 
 uuids_to_paths = {}
-current_port_numer = 5001
+current_port_number = 5001
 
 
 @app.route('/')
@@ -22,16 +24,24 @@ def start():
 
 @app.route('/handlereq/<uid>', methods=['POST', 'OPTIONS'])
 def handle_request(uid: str):
+    global current_port_number
     print('in handle request')
     main_path = uuids_to_paths[uid]
     # os.system('nohup python3 test/main.py &')
     print(
-        'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port 5001) &')
+        'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port ' + str(current_port_number) + ') &')
     os.system(
-        'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port 5001) &')
+        'nohup $(FLASK_APP=' + uuids_to_paths[uid] + ';flask run --host 127.0.0.1 --port ' + str(current_port_number) + ') &')
+
+    time.sleep(5)
+
+    r = requests.get('http://127.0.0.1:' + str(current_port_number) + '/main')
+    print('responce?', r.text)
+    # need to do a request to localhost to call the method that they want
 
     print('after os system')
-    return jsonify("This is our responce?")
+    current_port_number += 1
+    return jsonify(r.text)
 
 
 @app.route('/post/<unamerepo>', methods=['POST', 'OPTIONS'])
@@ -76,7 +86,7 @@ def rec(unamerepo: str):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     print(request.form.get('url'))
     # return jsonify(unamerepo) this is what jake had i commented out for testing return url
-    return "https://caleb.rotello.dev"
+    return jsonify(uid)
     # return data['url']
 
 

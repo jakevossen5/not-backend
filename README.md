@@ -1,4 +1,4 @@
-<img src="images/!backend.png" width="400" alt="img">
+<img src="images/notBackend.png" width="400" alt="img">
 
 ## Inspiration
 Do you need an api? Are you tired of AWS and its complicated UI? A lot of the time, you just need an API link to run your Python code. With !Backend (not backend), this is possible.

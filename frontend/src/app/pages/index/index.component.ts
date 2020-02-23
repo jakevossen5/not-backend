@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy, Inject,ViewChild,ElementRef,AfterViewInit } from "@angular/core";
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import noUiSlider from "nouislider";
 const axios = require('axios');
 declare var require: any
 declare const Buffer
+
+// let res_id = ""
 
 @Component({
   selector: "app-index",
@@ -10,7 +12,7 @@ declare const Buffer
 })
 export class IndexComponent implements OnInit, OnDestroy {
   isCollapsed = true;
-  api:string = "Your API will be here."
+  api: string = "Your API will be here."
   focus;
   focus1;
   focus2;
@@ -53,8 +55,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     body.classList.remove("index-page");
   }
 
-  @ViewChild('urlbox', {static: true}) input:ElementRef;
-//  @ViewChild('apiOut', {static: false}) value:this.api;
+  @ViewChild('urlbox', { static: true }) input: ElementRef;
 
   ngAfterViewInit(): string {
     console.log(this.input.nativeElement.value);
@@ -63,20 +64,25 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   makePostRequest() {
 
+    // return res.response.data;
+  }
+
+  submitCode(): void {
+
     // get url from text input
     var u = this.ngAfterViewInit();
 
     // remove last / if it exists
-    if (u.charAt(u.length-1) == '/'){
-      u = u.substr(0, u.length-1);
+    if (u.charAt(u.length - 1) == '/') {
+      u = u.substr(0, u.length - 1);
     }
 
     // split by /
     var uSplit = u.split('/');
 
     // get last two element
-    var uName = uSplit[uSplit.length-2];
-    var uRepo = uSplit[uSplit.length-1];
+    var uName = uSplit[uSplit.length - 2];
+    var uRepo = uSplit[uSplit.length - 1];
 
     // concat uname , project
     uName = uName.concat(',');
@@ -84,7 +90,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     console.log(uLink);
 
     // pass to server
-    var serverUrl = 'http://localhost:5000/post/'.concat(uLink);
+    var serverUrl = 'http://127.0.0.1:5000/post/'.concat(uLink);
 
     let res = axios.post(serverUrl, {
       headers: {
@@ -92,15 +98,12 @@ export class IndexComponent implements OnInit, OnDestroy {
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
         'Content-Type': 'multipart/form-data'
       },
-    }).then(function (response) {
+    }).then((response) => {
       console.log(response.data)
+      this.api = 'http://127.0.0.1:5000/r/' + response.data
     });
-    return res.response.data;
-  }
-
-  submitCode(): void {
-    var api = this.makePostRequest();
-    this.api = api;
-    console.log(api);
+    // var api = this.makePostRequest();
+    // this.api = api;
+    // console.log(api);
   }
 }

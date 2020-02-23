@@ -22,7 +22,7 @@ def start():
     return 'server running'
 
 
-@app.route('/handlereq/<uid>', methods=['POST', 'OPTIONS'])
+@app.route('/r/<uid>', methods=['GET', 'OPTIONS'])
 def handle_request(uid: str):
     global current_port_number
     print('in handle request')

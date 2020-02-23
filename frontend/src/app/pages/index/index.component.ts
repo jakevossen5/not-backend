@@ -54,8 +54,9 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   @ViewChild('urlbox', {static: true}) input:ElementRef;
+//  @ViewChild('apiOut', {static: false}) value:this.api;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): string {
     console.log(this.input.nativeElement.value);
     return this.input.nativeElement.value;
   };

@@ -1,5 +1,9 @@
 <img src="https://raw.githubusercontent.com/jakevossen5/backend-but-not/master/images/fullScreen.png" width="900" alt="img">
 
+## About this project
+
+This project was a HackCU VI hackathon project, and is no longer active or maintained. 
+
 ## Inspiration
 
 Do you need an API? Are you tired of AWS and its complicated UI? API design tools can be confusing for beginners, so we set out to create the most simple backend deployment tool on the market - !Backend(pronounced not backend)
